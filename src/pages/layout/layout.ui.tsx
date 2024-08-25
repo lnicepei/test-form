@@ -38,7 +38,9 @@ export function Layout() {
             flexDirection: 'row',
             alignItems: 'center',
             justifyContent: 'flex-start',
-            py: '30px',
+            pt: '30px',
+            pb: '40px',
+            mx: 'auto',
           }}
         >
           <AppBar
@@ -51,13 +53,15 @@ export function Layout() {
         </Box>
         <Paper
           elevation={0}
-          square
           sx={{
             height: {
               xs: '100%',
               sm: 'auto',
               md: 'auto',
               lg: 'auto',
+            },
+            padding: {
+              lg: '48px 40px',
             },
             width: '100%',
             maxWidth: 480,
@@ -187,12 +191,14 @@ function MyTabs() {
         value={pathKeys.register()}
         to={pathKeys.register()}
         component={Link}
+        sx={{ fontSize: '16px' }}
       />
       <Tab
         label="Login"
         value={pathKeys.login()}
         to={pathKeys.login()}
         component={Link}
+        sx={{ fontSize: '16px' }}
       />
     </Tabs>
   )
@@ -217,7 +223,7 @@ export function Footer() {
     >
       <Typography color="secondary">© 2024 MIND MONEY LIMITED</Typography>
       <Typography color="secondary">
-        Have some issue?{' '}
+        Have some issue? Write us{' '}
         <Link
           to="mailto:info@mind-money.eu"
           target="_blank"

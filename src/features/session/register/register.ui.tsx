@@ -23,7 +23,7 @@ export const RegisterForm = () => {
     register,
     handleSubmit,
     setValue,
-    getValues,
+    watch,
     formState: { errors, isDirty, isValid },
   } = useForm<RegisterUserDto>({
     mode: 'all',
@@ -40,6 +40,9 @@ export const RegisterForm = () => {
     const password = generatePassword()
     setValue('password', password)
   }
+
+  const isPromoCodeValid =
+    watch('referralCode') === import.meta.env.VITE_PROMO_CODE
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -73,15 +76,20 @@ export const RegisterForm = () => {
                   display="flex"
                   alignItems="flex-start"
                   flexDirection="column"
+                  component="span"
                   gap={1}
                 >
-                  <Typography color="secondary">
-                    Strength: {assessPasswordStrength(getValues('password'))}
+                  <Typography
+                    color="secondary"
+                    component="span"
+                  >
+                    Strength: {assessPasswordStrength(watch('password'))}
                   </Typography>
                   <Box
                     display="flex"
                     justifyContent="center"
                     gap={1}
+                    component="span"
                   >
                     {errors.password?.message && (
                       <img
@@ -89,7 +97,10 @@ export const RegisterForm = () => {
                         alt="info"
                       />
                     )}
-                    <Typography color="secondary">
+                    <Typography
+                      color="secondary"
+                      component="span"
+                    >
                       {errors.password?.message}
                     </Typography>
                   </Box>
@@ -116,13 +127,26 @@ export const RegisterForm = () => {
           </Button>
         </Box>
 
-        <TextField
-          type="string"
-          placeholder="Referral code"
-          {...register('referralCode')}
-          error={!!errors.referralCode}
-          helperText={errors.referralCode?.message}
-        />
+        <Box position="relative">
+          <TextField
+            type="string"
+            fullWidth
+            placeholder="Referral code"
+            {...register('referralCode')}
+          />
+          {isPromoCodeValid && (
+            <Box
+              position="absolute"
+              right={20}
+              top={15}
+            >
+              <img
+                src="/tick.svg"
+                alt="info"
+              />
+            </Box>
+          )}
+        </Box>
 
         <FormControlLabel
           control={
@@ -158,7 +182,6 @@ export const RegisterForm = () => {
         <Button
           type="submit"
           variant="contained"
-          sx={{ backgroundColor: blue[700] }}
           disabled={!canSubmit}
         >
           Sign in

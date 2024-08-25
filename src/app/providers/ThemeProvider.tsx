@@ -18,6 +18,10 @@ const theme = createTheme({
     background: {
       default: '#f4f4f4',
     },
+    action: {
+      disabledBackground: '#A1B1E7',
+      disabled: 'white',
+    },
   },
   typography: {
     fontFamily: ['-apple-system', 'Inter', 'Roboto'].join(','),
