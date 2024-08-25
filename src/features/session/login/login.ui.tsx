@@ -1,6 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Box, Button, Stack, TextField } from '@mui/material'
-import { blue } from '@mui/material/colors'
 import { LoginUserDto, LoginUserDtoSchema } from '@shared/api/auth'
 import { useForm } from 'react-hook-form'
 
@@ -45,7 +44,6 @@ export const LoginForm = () => {
         <Button
           type="submit"
           variant="contained"
-          sx={{ backgroundColor: blue[700] }}
           disabled={!canSubmit}
         >
           Login

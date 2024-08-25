@@ -60,7 +60,11 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           '& .MuiTabs-indicator': {
-            backgroundColor: 'transparent',
+            minHeight: 47,
+            zIndex: 0,
+            marginBlock: '4px',
+            borderRadius: 10,
+            backgroundColor: 'white',
           },
           '& .MuiTabs-flexContainer': {
             padding: '4px',
@@ -78,7 +82,7 @@ const theme = createTheme({
           minHeight: 47,
           borderRadius: 10,
           padding: 0,
-          color: 'rgba(0, 0, 0, 0.85)',
+          color: 'black',
           fontFamily: [
             '-apple-system',
             'BlinkMacSystemFont',
@@ -86,7 +90,8 @@ const theme = createTheme({
           ].join(','),
           '&.Mui-selected': {
             color: 'black',
-            backgroundColor: 'white',
+            backgroundColor: 'transparent',
+            zIndex: 2,
           },
         },
       },

@@ -13,10 +13,8 @@ import { blue } from '@mui/material/colors'
 import { useForm } from 'react-hook-form'
 
 import { RegisterUserDto, RegisterUserDtoSchema } from '@shared/api/auth'
-import {
-  assessPasswordStrength,
-  generatePassword,
-} from '@shared/lib/react-hook-form'
+import { generatePassword } from '@shared/lib/react-hook-form'
+import { CurrentError } from '@shared/ui/current-error'
 
 export const RegisterForm = () => {
   const {
@@ -72,49 +70,20 @@ export const RegisterForm = () => {
             error={!!errors.password}
             helperText={
               errors.password?.message && (
-                <Box
-                  display="flex"
-                  alignItems="flex-start"
-                  flexDirection="column"
-                  component="span"
-                  gap={1}
-                >
-                  <Typography
-                    color="secondary"
-                    component="span"
-                  >
-                    Strength: {assessPasswordStrength(watch('password'))}
-                  </Typography>
-                  <Box
-                    display="flex"
-                    justifyContent="center"
-                    gap={1}
-                    component="span"
-                  >
-                    {errors.password?.message && (
-                      <img
-                        src="/cross.svg"
-                        alt="info"
-                      />
-                    )}
-                    <Typography
-                      color="secondary"
-                      component="span"
-                    >
-                      {errors.password?.message}
-                    </Typography>
-                  </Box>
-                </Box>
+                <CurrentError
+                  error={errors.password?.message}
+                  currentPassword={watch('password')}
+                />
               )
             }
           />
           <Button
             sx={{
               position: 'absolute',
-              right: '1rem',
+              right: 16,
               zIndex: 1,
               top: 11,
-              height: '35px',
+              height: 35,
               color: 'black',
               p: 2,
             }}

@@ -1,0 +1,1 @@
+export { MyTabs as Tabs } from './tabs.ui'
