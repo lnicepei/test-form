@@ -30,6 +30,10 @@ const browserRouter = createBrowserRouter([
             path: pathKeys.login(),
             element: <LoginPage />,
           },
+          {
+            path: pathKeys.home(),
+            loader: async () => redirect(pathKeys.register()),
+          },
         ],
       },
       {

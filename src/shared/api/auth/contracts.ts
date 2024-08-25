@@ -1,14 +1,19 @@
+import validator from 'validator'
 import { z } from 'zod'
 
 export const RegisterUserDtoSchema = z
   .object({
     email: z.string().email({
-      message:
-        'Oops! The email address you entered is invalid. Please double-check and make sure it follows the format: example@domain.com',
+      message: 'Wrong type of email',
+    }),
+    phone: z.string().refine(validator.isMobilePhone, {
+      message: 'Invalid phone number',
     }),
     password: z
       .string()
-      .min(8)
+      .min(8, {
+        message: 'Password must be at least 8 characters',
+      })
       .regex(/[A-Z]/, {
         message: 'One or more capitalized letters.',
       })

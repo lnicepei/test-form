@@ -1,7 +1,7 @@
 import { zodResolver } from '@hookform/resolvers/zod'
+import { Box, Button, Stack, TextField } from '@mui/material'
+import { blue } from '@mui/material/colors'
 import { LoginUserDto, LoginUserDtoSchema } from '@shared/api/auth'
-import { hasMessages } from '@shared/lib/react-hook-form'
-import { ErrorList } from '@shared/ui/error-list'
 import { useForm } from 'react-hook-form'
 
 export const LoginForm = () => {
@@ -10,7 +10,7 @@ export const LoginForm = () => {
     handleSubmit,
     formState: { errors, isDirty, isValid },
   } = useForm<LoginUserDto>({
-    mode: 'onTouched',
+    mode: 'all',
     resolver: zodResolver(LoginUserDtoSchema),
     defaultValues: { email: '', password: '' },
   })
@@ -21,36 +21,36 @@ export const LoginForm = () => {
     alert(JSON.stringify(loginUserDto))
 
   return (
-    <>
-      {hasMessages(errors) && <ErrorList errors={errors} />}
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <Stack spacing={3}>
+        <TextField
+          type="text"
+          placeholder="E-mail"
+          {...register('email')}
+          error={!!errors.email}
+          helperText={errors.email?.message}
+        />
 
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <fieldset className="form-group">
-          <input
-            className="form-control form-control-lg"
+        <Box position="relative">
+          <TextField
+            fullWidth
             type="text"
-            placeholder="Email"
-            {...register('email')}
-          />
-        </fieldset>
-
-        <fieldset className="form-group">
-          <input
-            className="form-control form-control-lg"
-            type="password"
             placeholder="Password"
             {...register('password')}
+            error={!!errors.password}
+            helperText={errors.password?.message}
           />
-        </fieldset>
+        </Box>
 
-        <button
-          className="btn btn-lg btn-primary pull-xs-right"
+        <Button
           type="submit"
+          variant="contained"
+          sx={{ backgroundColor: blue[700] }}
           disabled={!canSubmit}
         >
-          Sign in
-        </button>
-      </form>
-    </>
+          Login
+        </Button>
+      </Stack>
+    </form>
   )
 }
