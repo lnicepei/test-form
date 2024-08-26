@@ -1,5 +1,4 @@
-import { Box, Typography } from '@mui/material'
-import { Link } from 'react-router-dom'
+import { Box, Link, Typography } from '@mui/material'
 
 export function Footer() {
   return (
@@ -22,7 +21,7 @@ export function Footer() {
       <Typography color="secondary">
         Have some issue? Write us{' '}
         <Link
-          to="mailto:info@mind-money.eu"
+          href="mailto:info@mind-money.eu"
           target="_blank"
           rel="noreferrer"
         >
